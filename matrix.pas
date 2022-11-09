@@ -3,6 +3,8 @@ unit matrix;
 
 interface
 
+    uses crt;
+
     // Largeur maximale d'une matrice. Elle peut donc contenir un minimum de MAX_WIDTH*MAX_WIDTH éléments.
     const MAX_WIDTH = 10;
 
@@ -18,6 +20,7 @@ interface
             constructor init(demanded_size: integer);
             procedure set_value(x, y: Integer; value: Integer);
             procedure display();
+            procedure apply_gauss();
     end;
 
 implementation
@@ -74,5 +77,37 @@ implementation
         writeln('  ┘');
     end;
 
+    // Applique l'algorithme du pivot de Gauss à la matrice.
+    procedure SquareMatrix.apply_gauss();
+    var step, y, n, x: Integer;
+    var char_pos: Integer;
+    begin
+        for step := 0 to size-2 do begin
+            writeln('Step ', step, ' :');
+            self.display();
+            char_pos := WhereY();
+
+            for y := step+1 to size-1 do begin
+                // On veut obtenir `data[step][y] = 0` en ajoutant `n` multiples de la ligne `step`
+                // On doit donc résoudre `data[step][y] + n * data[step][step] = 0`
+                if data[step, step] = 0 then begin
+                    writeln('FATAL: the matrix is not invertible.');
+                    halt;
+                end;
+                n := -data[step, y] div data[step, step];
+
+                // Log
+                GotoXY(7+3*size, char_pos - size - 1 + y);
+                write('L', y, ' ← L', y, ' + ', n, ' * L', step);
+
+                // Application
+                for x := step to size-1 do
+                    data[x, y] := data[x, y] + n * data[x, step];
+            end;
+            GotoXY(1, char_pos);
+        end;
+        writeln('Fini:');
+        self.display();
+    end;
 end.
 
