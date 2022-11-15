@@ -168,7 +168,7 @@ implementation
                     writeln('FATAL: the matrix is not invertible.');
                     halt;
                 end;
-                n := a.data[step][y].opposite().divide(a.data[step][step]);
+                n := a.data[step][y].divide(a.data[step][step]);
 
                 // Log
                 GotoXY(7+4*a.size, char_pos - a.size - 1 + y);
@@ -176,8 +176,8 @@ implementation
 
                 // Application
                 for x := step to a.size-1 do
-                    a.data[x][y] := a.data[x][y].add(n.multiply(a.data[x][step]));
-                b.data[y] := b.data[y].add(n.multiply(b.data[step]));
+                    a.data[x][y] := a.data[x][y].substract(n.multiply(a.data[x][step]));
+                b.data[y] := b.data[y].substract(n.multiply(b.data[step]));
             end;
             GotoXY(1, char_pos);
         end;
