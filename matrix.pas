@@ -158,6 +158,7 @@ implementation
         for step := 0 to a.size-2 do begin
             writeln('Step ', step, ' :');
             a.display();
+            b.display();
             char_pos := WhereY();
 
             for y := step+1 to a.size-1 do begin
@@ -176,11 +177,13 @@ implementation
                 // Application
                 for x := step to a.size-1 do
                     a.data[x][y] := a.data[x][y].add(n.multiply(a.data[x][step]));
+                b.data[y] := b.data[y].add(n.multiply(b.data[step]));
             end;
             GotoXY(1, char_pos);
         end;
         writeln('Fini:');
         a.display();
+        b.display();
     end;
 end.
 
