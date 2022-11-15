@@ -19,6 +19,8 @@ interface
             function multiply(other: Number): Number;
             function divide(other: Number): Number;
     end;
+
+    function greatestCommonDivisor(a, b: Integer): Integer;
 implementation
 
 constructor Number.init_zero();
@@ -37,13 +39,37 @@ begin
     self.den := new_den;
 end;
 
+// Took from https://wiki.freepascal.org/Greatest_common_divisor
+function greatestCommonDivisor(a, b: Integer): Integer;
+begin
+    // only works with positive integers
+    if (a < 0) then a := -a;
+    if (b < 0) then b := -b;
+    // don't enter loop, since subtracting zero won't break condition
+    if (a = 0) then exit(b);
+    if (b = 0) then exit(a);
+    while not (a = b) do begin
+        if (a > b) then
+            a := a - b
+        else
+            b := b - a;
+    end;
+    greatestCommonDivisor := a;
+end;
+
 procedure Number.beautify();
+var gcd: Integer;
 begin
     if self.num = 0 then
         self.den := 1;
     if self.den < 0 then begin
         self.num := -self.num;
         self.den := -self.den;
+    end;
+    gcd := greatestCommonDivisor(self.num, self.den);
+    if gcd <> 1 then begin
+        self.num := self.num div gcd;
+        self.den := self.den div gcd;
     end;
 end;
 
