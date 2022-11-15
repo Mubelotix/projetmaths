@@ -17,10 +17,12 @@ begin
     a.set_value(1, 2, 5);
     a.set_value(2, 2, 8);
     a.display();
+
     b.init(3);
     b.set_value(0, 2);
     b.set_value(1, -1);
     b.set_value(2, 8);
     b.display();
+    
     apply_gauss(a, b);
 end.
