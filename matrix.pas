@@ -157,8 +157,8 @@ implementation
     begin
         for step := 0 to a.size-2 do begin
             writeln('Step ', step, ' :');
-            a.display();
             b.display();
+            a.display();
             char_pos := WhereY();
 
             for y := step+1 to a.size-1 do begin
