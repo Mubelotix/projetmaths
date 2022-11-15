@@ -21,8 +21,23 @@ interface
             procedure set_fraction(x, y: Integer; frac: Number);
             procedure set_value(x, y: Integer; value: Integer);
             procedure display();
-            procedure apply_gauss();
     end;
+
+    type ColumnMatrix = object
+        private
+            // Hauteur de la matrice colonne.
+            size: integer;
+            // Valeurs de la matrice indexées par y, de 0 à size-1.
+            data: array[0..MAX_WIDTH-1] of Number;
+
+        public
+            constructor init(demanded_size: integer);
+            procedure set_fraction(y: Integer; frac: Number);
+            procedure set_value(y: Integer; value: Integer);
+            procedure display();
+    end;
+
+    procedure apply_gauss(var a: SquareMatrix; var b: ColumnMatrix);
 
 implementation
     // Initialise une matrice carrée de largeur et hauteur demanded_size.
@@ -48,6 +63,26 @@ implementation
                 data[x][y].den := 1;
             end;
     end;
+    constructor ColumnMatrix.init(demanded_size: integer);
+    var y: Integer;
+    begin
+        // Check size
+        if demanded_size > MAX_WIDTH then begin
+            writeln('Error: the size of the matrix is too big.');
+            halt;
+        end;
+        if demanded_size < 1 then begin
+            writeln('Error: the size of the matrix is too small.');
+            halt;
+        end;
+        
+        // Init values
+        size := demanded_size;
+        for y := 0 to size-1 do begin
+            data[y].num := 0;
+            data[y].den := 1;
+        end;
+    end;
 
     // Modifie la valeur d'une case de la matrice.
     procedure SquareMatrix.set_fraction(x, y: Integer; frac: Number);
@@ -58,6 +93,14 @@ implementation
         end;
         data[x][y] := frac;
     end;
+    procedure ColumnMatrix.set_fraction(y: Integer; frac: Number);
+    begin
+        if (y < 0) or (y >= size) then begin
+            writeln('Error: the coordinates are out of the matrix.');
+            halt;
+        end;
+        data[y] := frac;
+    end;
 
     // Modifie la valeur d'une case de la matrice.
     procedure SquareMatrix.set_value(x, y: Integer; value: Integer);
@@ -67,6 +110,14 @@ implementation
             halt;
         end;
         data[x][y].init_int(value);
+    end;
+    procedure ColumnMatrix.set_value(y: Integer; value: Integer);
+    begin
+        if (y < 0) or (y >= size) then begin
+            writeln('Error: the coordinates are out of the matrix.');
+            halt;
+        end;
+        data[y].init_int(value);
     end;
 	
     // Affiche la matrice sur la sortie standard.
@@ -89,39 +140,47 @@ implementation
             write('    ');
         writeln('  ┘');
     end;
+    procedure ColumnMatrix.display();
+    var y: Integer;
+    begin
+        writeln('┌      ┐');
+        for y := 0 to size-1 do
+            writeln('│', padleft(data[y].to_string(), 3), '   │');
+        writeln('└      ┘');
+    end;
 
     // Applique l'algorithme du pivot de Gauss à la matrice.
-    procedure SquareMatrix.apply_gauss();
+    procedure apply_gauss(var a: SquareMatrix; var b: ColumnMatrix);
     var step, y, x: Integer;
     var n: Number;
     var char_pos: Integer;
     begin
-        for step := 0 to size-2 do begin
+        for step := 0 to a.size-2 do begin
             writeln('Step ', step, ' :');
-            self.display();
+            a.display();
             char_pos := WhereY();
 
-            for y := step+1 to size-1 do begin
+            for y := step+1 to a.size-1 do begin
                 // On veut obtenir `data[step][y] = 0` en ajoutant `n` multiples de la ligne `step`
                 // On doit donc résoudre `data[step][y] + n * data[step][step] = 0`
-                if data[step][step].num = 0 then begin
+                if a.data[step][step].num = 0 then begin
                     writeln('FATAL: the matrix is not invertible.');
                     halt;
                 end;
-                n := data[step][y].opposite().divide(data[step][step]);
+                n := a.data[step][y].opposite().divide(a.data[step][step]);
 
                 // Log
-                GotoXY(7+4*size, char_pos - size - 1 + y);
+                GotoXY(7+4*a.size, char_pos - a.size - 1 + y);
                 write('L', y, ' ← L', y, ' + ', n.to_string(), ' * L', step);
 
                 // Application
-                for x := step to size-1 do
-                    data[x][y] := data[x][y].add(n.multiply(data[x][step]));
+                for x := step to a.size-1 do
+                    a.data[x][y] := a.data[x][y].add(n.multiply(a.data[x][step]));
             end;
             GotoXY(1, char_pos);
         end;
         writeln('Fini:');
-        self.display();
+        a.display();
     end;
 end.
 
