@@ -40,6 +40,24 @@ begin
         cursor := cursor + 1;
 end;
 
+function read_number(line: String; var cursor: Integer): Number;
+var num, den: Integer;
+begin
+    // Lit le numérateur
+    num := read_integer(line, cursor);
+
+    // Termine si le dénominateur n'est pas présent ou sinon passe le /
+    if (cursor > length(line)) or (line[cursor] <> '/') then begin
+        read_number.init_int(num);
+        exit;
+    end else
+        cursor := cursor + 1;
+
+    // Lit le dénominateur
+    den := read_integer(line, cursor);
+    read_number.init(num, den);
+end;
+
 function read_input_data(): InputData;
 var line: String;
     size: Integer;
@@ -56,25 +74,8 @@ begin
     for y := 0 to size - 1 do begin
         readln(line);
         cursor := 1;
-
-        for x := 0 to size - 1 do begin
-            // Lit le numérateur
-            num := read_integer(line, cursor);
-
-            // Termine si le dénominateur n'est pas présent ou sinon passe le /
-            if (cursor > length(line)) or (line[cursor] <> '/') then begin
-                read_input_data.a.set_value(x, y, num);
-                continue;
-            end else
-                cursor := cursor + 1;
-
-            // Lit le dénominateur
-            den := read_integer(line, cursor);
-
-            // On set le nombre
-            fraction.init(num, den);
-            read_input_data.a.set_fraction(x, y, fraction);
-        end;
+        for x := 0 to size - 1 do
+            read_input_data.a.set_fraction(x, y, read_number(line, cursor));
     end;
 
     read_input_data.a.display();
