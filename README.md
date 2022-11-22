@@ -22,4 +22,4 @@ Gauss_LU_exemple_res.txt    SORTIE contient a, b et x
 
 Dimensions, les éléments de la matrice et le second membre
 
-./program < gauss_lu_exemple_data.txt > Gauss_LU_exemple_res.txt
+./program < gauss_exemple_data.txt > Gauss_exemple_res.txt
