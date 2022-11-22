@@ -91,7 +91,6 @@ end;
 
 begin
     read_input_data();
-    exit;
 
     a.init(3);
     a.set_value(0, 0, 1);
