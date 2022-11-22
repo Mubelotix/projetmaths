@@ -79,6 +79,14 @@ begin
     end;
 
     read_input_data.a.display();
+
+    for y := 0 to size - 1 do begin
+        readln(line);
+        cursor := 1;
+        read_input_data.b.set_fraction(y, read_number(line, cursor));
+    end;
+
+    read_input_data.b.display();
 end;
 
 begin
