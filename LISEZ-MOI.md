@@ -1,6 +1,6 @@
 # Implémentation du pivot de Gauss en Pascal sur des nombres rationnels
 
-Ce programme peut être utilisé pour la résolution de systèmes linéaires de la forme `AX = B` où `A` est une matrice carrée et `B` est une matrice colonne.
+Ce programme peut être utilisé pour la résolution de systèmes linéaires en le représentant sous la forme `AX = B` où `A` est une matrice carrée et `B` est une matrice colonne correspondant au second membre du système.
 
 ## Organisation du code
 
