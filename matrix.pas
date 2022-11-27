@@ -18,7 +18,9 @@ interface
 
         public
             constructor init(demanded_size: integer);
+            function get_size(): Integer;
             procedure set_fraction(x, y: Integer; frac: Number);
+            function get_fraction(x, y: Integer): Number;
             procedure set_value(x, y: Integer; value: Integer);
             procedure display();
     end;
@@ -32,7 +34,9 @@ interface
 
         public
             constructor init(demanded_size: integer);
+            function get_size(): Integer;
             procedure set_fraction(y: Integer; frac: Number);
+            function get_fraction(y: Integer): Number;
             procedure set_value(y: Integer; value: Integer);
             procedure display();
     end;
@@ -84,6 +88,16 @@ implementation
         end;
     end;
 
+    // Retourne la taille
+    function SquareMatrix.get_size(): Integer;
+    begin
+        get_size := size;
+    end;
+    function ColumnMatrix.get_size(): Integer;
+    begin
+        get_size := size;
+    end;
+
     // Modifie la valeur d'une case de la matrice.
     procedure SquareMatrix.set_fraction(x, y: Integer; frac: Number);
     begin
@@ -100,6 +114,24 @@ implementation
             halt;
         end;
         data[y] := frac;
+    end;
+
+    // Retourne la valeur d'une case de la matrice.
+    function SquareMatrix.get_fraction(x, y: Integer): Number;
+    begin
+        if (x < 0) or (x >= size) or (y < 0) or (y >= size) then begin
+            writeln('Error: the coordinates are out of the matrix.');
+            halt;
+        end;
+        get_fraction := data[x][y];
+    end;
+    function ColumnMatrix.get_fraction(y: Integer): Number;
+    begin
+        if (y < 0) or (y >= size) then begin
+            writeln('Error: the coordinates are out of the matrix.');
+            halt;
+        end;
+        get_fraction := data[y];
     end;
 
     // Modifie la valeur d'une case de la matrice.
@@ -183,13 +215,6 @@ implementation
                 b.data[y] := b.data[y].substract(n.multiply(b.data[step]));
             end;
             if isatty(output)=1 then GotoXY(1, char_pos);
-        end;
-
-        // Log si dans le terminal
-        if isatty(output)=1 then begin
-            writeln('Terminé!');
-            a.display();
-            b.display();
         end;
     end;
 end.

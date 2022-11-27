@@ -13,6 +13,9 @@ end;
 // Fonction qui lit les données d'entrée
 function read_input_data(): InputData;
 
+/// Procédure qui écrit les données de sortie
+procedure output_data(data: InputData);
+
 implementation
 
 function read_integer(line: String; var cursor: Integer): Integer;
@@ -88,6 +91,20 @@ begin
         cursor := 1;
         read_input_data.b.set_fraction(y, read_number(line, cursor));
     end;
+end;
+
+procedure output_data(data: InputData);
+var size, x, y: Integer;
+begin
+    size := data.a.get_size();
+    writeln(size);
+    for y := 0 to size - 1 do begin
+        for x := 0 to size - 1 do
+            write(data.a.get_fraction(x, y).to_string(), ' ');
+        writeln();
+    end;
+    for y := 0 to size - 1 do
+        writeln(data.b.get_fraction(y).to_string());
 end;
 
 end.
