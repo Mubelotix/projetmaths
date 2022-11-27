@@ -3,7 +3,7 @@ unit matrix;
 
 interface
 
-    uses crt, fraction, strutils;
+    uses crt, fraction, strutils, termio;
 
     // Largeur maximale d'une matrice. Elle peut donc contenir un minimum de MAX_WIDTH*MAX_WIDTH éléments.
     const MAX_WIDTH = 10;
@@ -156,10 +156,13 @@ implementation
     var char_pos: Integer;
     begin
         for step := 0 to a.size-2 do begin
-            writeln('Step ', step, ' :');
-            b.display();
-            a.display();
-            char_pos := WhereY();
+            // Log si dans le terminal
+            if isatty(output)=1 then begin
+                writeln('Step ', step, ' :');
+                b.display();
+                a.display();
+                char_pos := WhereY();
+            end;
 
             for y := step+1 to a.size-1 do begin
                 // On veut obtenir `data[step][y] = 0` en ajoutant `n` multiples de la ligne `step`
@@ -170,20 +173,24 @@ implementation
                 end;
                 n := a.data[step][y].divide(a.data[step][step]);
 
-                // Log
-                GotoXY(7+4*a.size, char_pos - a.size - 1 + y);
-                write('L', y, ' ← L', y, ' + ', n.to_string(), ' * L', step);
+                // Log si dans le terminal
+                if isatty(output)=1 then GotoXY(7+4*a.size, char_pos - a.size - 1 + y);
+                if isatty(output)=1 then write('L', y, ' ← L', y, ' + ', n.to_string(), ' * L', step);
 
                 // Application
                 for x := step to a.size-1 do
                     a.data[x][y] := a.data[x][y].substract(n.multiply(a.data[x][step]));
                 b.data[y] := b.data[y].substract(n.multiply(b.data[step]));
             end;
-            GotoXY(1, char_pos);
+            if isatty(output)=1 then GotoXY(1, char_pos);
         end;
-        writeln('Fini:');
-        a.display();
-        b.display();
+
+        // Log si dans le terminal
+        if isatty(output)=1 then begin
+            writeln('Terminé!');
+            a.display();
+            b.display();
+        end;
     end;
 end.
 
