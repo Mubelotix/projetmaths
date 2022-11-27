@@ -32,7 +32,7 @@ Le programme a été testé avec succès sur les machines suivantes :
     - Compilateur: FPC 3.2.2
     - IDE: VsCode 1.73.1 + FPC 3.2.2
 
-## Entrée/Sortie et Nomemclature
+## Entrée/Sortie et Nomenclature
 
 Le programme lit les données depuis l'entrée standard et écrit les résultats sur la sortie standard.
 Plutôt que de rentrer les données à la main, il est recommandé d'utiliser des fichiers de redirection.
