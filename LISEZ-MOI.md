@@ -74,6 +74,9 @@ Vous noterez que la matrice `A` est maintenant une matrice triangulaire supérie
 
 Il est conseillé de suffixer le fichier de sortie par `_sortie.txt`.
 
+Si vous ne spécifiez pas de redirection de sortie, le programme affichera des informations concernant les calculs effectués au cours de l'application de la méthode de Gauss.
+Ceci peut être utile pour comprendre le fonctionnement du programme étape par étape.
+
 ## Exemple d'utilisation
 
 Supposons que nous voulions résoudre le système linéaire suivant:
@@ -102,7 +105,7 @@ Nous souhaitons recevoir les résultats dans le fichier `gauss_exemple_sortie.tx
 
 Pour lancer le programme, nous pouvons utiliser les commandes suivantes:
 
-```
+```sh
 fpc main.pas
 ./main < gauss_exemple_entree.txt > gauss_exemple_sortie.txt
 ```
@@ -122,6 +125,54 @@ En sortie, nous obtenons le fichier `gauss_exemple_sortie.txt` contenant (à que
 Nous pouvons en déduire la solution du système linéaire initial après réécriture.
 
 <img alt="Système linéaire final" src="https://www.bibmath.net/dico/g/images/gausspivot3.png">
+
+Afin de mieux comprendre le déroulement des calculs, nous pouvons désactiver la redirection de sortie.
+Le programme affichera alors les étapes de la méthode de Gauss dans la console.
+Ainsi, après lancement de la commande suivante:
+
+```sh
+./main < gauss_exemple_entree.txt
+```
+
+La sortie ressemble à ceci:
+
+```
+Step 0 :
+┌      ┐
+│  2   │
+│ -1   │
+│  8   │
+└      ┘
+┌              ┐
+│  1   2   2   │
+│  1   3  -2   │  L1 ← L1 + 1 * L0
+│  3   5   8   │  L2 ← L2 + 3 * L0
+└              ┘
+Step 1 :
+┌      ┐
+│  2   │
+│ -3   │
+│  2   │
+└      ┘
+┌              ┐
+│  1   2   2   │
+│  0   1  -4   │
+│  0  -1   2   │  L2 ← L2 + -1 * L1
+└              ┘
+Terminé!
+┌              ┐
+│  1   2   2   │
+│  0   1  -4   │
+│  0   0  -2   │
+└              ┘
+┌      ┐
+│  2   │
+│ -3   │
+│ -1   │
+└      ┘
+```
+
+A chaque étape, le programme affiche la matrice `B` puis `A`, accompangée des opérations qui seront effectuées sur les lignes pour passer à l'étape suivante.
 
 ## Bordel à trier
 
