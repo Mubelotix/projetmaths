@@ -145,8 +145,8 @@ Step 0 :
 └      ┘
 ┌              ┐
 │  1   2   2   │
-│  1   3  -2   │  L1 ← L1 + 1 * L0
-│  3   5   8   │  L2 ← L2 + 3 * L0
+│  1   3  -2   │  L2 ← L2 - 1 * L1
+│  3   5   8   │  L3 ← L3 - 3 * L1
 └              ┘
 Step 1 :
 ┌      ┐
@@ -157,19 +157,19 @@ Step 1 :
 ┌              ┐
 │  1   2   2   │
 │  0   1  -4   │
-│  0  -1   2   │  L2 ← L2 + -1 * L1
+│  0  -1   2   │  L3 ← L3 - -1 * L2
 └              ┘
 Terminé!
-┌              ┐
-│  1   2   2   │
-│  0   1  -4   │
-│  0   0  -2   │
-└              ┘
 ┌      ┐
 │  2   │
 │ -3   │
 │ -1   │
 └      ┘
+┌              ┐
+│  1   2   2   │
+│  0   1  -4   │
+│  0   0  -2   │
+└              ┘
 ```
 
 A chaque étape, le programme affiche la matrice `B` puis `A`, accompangée des opérations qui seront effectuées sur les lignes pour passer à l'étape suivante.

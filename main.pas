@@ -12,8 +12,8 @@ begin
     // Affiche les résultats ou les retourne dans le fichier
     if isatty(output)=1 then begin
         writeln('Terminé!');
-        data.a.display();
         data.b.display();
+        data.a.display();
     end else
         output_data(data);
 end.

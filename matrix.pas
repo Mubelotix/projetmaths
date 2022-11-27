@@ -207,7 +207,7 @@ implementation
 
                 // Log si dans le terminal
                 if isatty(output)=1 then GotoXY(7+4*a.size, char_pos - a.size - 1 + y);
-                if isatty(output)=1 then write('L', y, ' ← L', y, ' + ', n.to_string(), ' * L', step);
+                if isatty(output)=1 then write('L', y+1, ' ← L', y+1, ' - ', n.to_string(), ' * L', step+1);
 
                 // Application
                 for x := step to a.size-1 do
