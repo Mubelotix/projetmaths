@@ -231,9 +231,78 @@ Ayant défini les valeurs des trois parties, il est possible de calculer la vale
 
 Vous remarquerez la proximité entre le principe de la virgule flottante et l'écriture scientifique des nombres. La principale différence étant la base utilisée.
 
-montrer comment on obtient m1, puis m2...
-on prend la partie entière, on multiplie par 2, on prend la partie entière... 
-quand on a une partie entière (ex 1.6) on soustrait mi donc si m4 alors -> 0.6
-montrer le cycle
-développement binaire infini
-périodique
+## Exemples
+
+### Exemple d'un nombre codé sans erreur
+
+Nous allons commencer par fixer une représentation flottante au hasard, puis calculer sa valeur. Nous pourrons déduire que la valeur trouvée possède une représentation flottante exacte.
+
+<img width="100%" src="visuals/exemple_exact.svg">
+
+<!-- exposant = exposant_{code} - 127 = 128 - 127 = 1 -->
+
+<img src="https://latex.codecogs.com/svg.image?exposant&space;=&space;exposant_{code}&space;-&space;127&space;=&space;128&space;-&space;127&space;=&space;1">
+
+<!-- mantisse = 2^{0} + 2^{-2} + 2^{-5} = 1.28125 -->
+
+<img src="https://latex.codecogs.com/svg.image?mantisse&space;=&space;2^{0}&space;&plus;&space;2^{-2}&space;&plus;&space;2^{-5}&space;=&space;1.28125">
+
+<!-- X = signe * mantisse * 2^{exposant} = 1 * 1.28125 * 2^{1} = 2.5625 -->
+
+<img src="https://latex.codecogs.com/svg.image?X&space;=&space;signe&space;*&space;mantisse&space;*&space;2^{exposant}&space;=&space;1&space;*&space;1.28125&space;*&space;2^{1}&space;=&space;2.5625">
+
+Donc 2.5625 peut être représenté exactement en simple précision.
+
+### Exemple d'un nombre codé avec erreur
+
+Nous allons maintenant prendre un nombre décimal et tenter de trouver sa mantisse codée. Prenons 0,55. Une méthode simple pour trouver la mantisse est de réaliser successivement l'opération suivante sur le nombre :
+
+- Multiplier le nombre par 2
+- Mettre de côté le chiffre de la partie entière
+- Si le nombre est supérieur à 1, y soustraire 1
+
+Notez que si on tombe sur 0 par chance, alors on peut arrêter la répétition car tous les prochains chiffres seront des 0.
+
+L'opération peut être répétée 24 fois au maximum (23 bits de mantisse + 1 bit caché). Après suppression du bit caché, nous obtenons alors la mantisse codée. Essayons d'appliquer cette méthode à 0,55.
+
+<!-- 
+\\
+0.55 * 2 = 1.1 \\
+1.1 \geqslant 1 \to {\color{Red} 1} \\
+1.1 - 1 = 0.1 \\
+\\
+\left.\begin{matrix}
+0.1 * 2 = 0.2 \\
+0.2 \leqslant 1 \to {\color{Red} 0} \\
+\\
+0.2 * 2 = 0.4 \\
+0.4 \leqslant 1 \to {\color{Red} 0} \\
+\\
+0.4 * 2 = 0.8 \\
+0.8 \leqslant 1 \to {\color{Red} 0} \\
+\\
+0.8 * 2 = 1.6 \\
+1.6 \geqslant 1 \to {\color{Red} 1} \\
+1.6 - 1 = 0.6 \\
+\\
+0.6 * 2 = 1.2 \\
+1.2 \geqslant 1 \to {\color{Red} 1} \\
+1.2 - 1 = 0.2 \\
+\end{matrix}\right\}{cycle}
+-->
+
+<img src="https://latex.codecogs.com/svg.image?\\0.55&space;*&space;2&space;=&space;1.1&space;\\1.1&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.1&space;-&space;1&space;=&space;0.1&space;\\\\\left.\begin{matrix}0.1&space;*&space;2&space;=&space;0.2&space;\\0.2&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.2&space;*&space;2&space;=&space;0.4&space;\\0.4&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.4&space;*&space;2&space;=&space;0.8&space;\\0.8&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.8&space;*&space;2&space;=&space;1.6&space;\\1.6&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.6&space;-&space;1&space;=&space;0.6&space;\\\\0.6&space;*&space;2&space;=&space;1.2&space;\\1.2&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.2&space;-&space;1&space;=&space;0.2&space;\\\end{matrix}\right\}{cycle}">
+
+Au cours de la recherche de la mantisse, nous tombons sur une valeur qui a déjà été rencontrée précédemment. Si l'on continuait, on constaterait une répétition sur les prochains chiffres également. Nous rencontrons ici une boucle infinie, ce qui signifie que le développement binaire de 0,55 est infini, et que 0,55 a besoin d'une infinité de chiffres après la virgule pour être représenté. Comme nous ne pouvons stocker que les 23 premiers chiffres, il y aura donc forcément une erreur d'imprécision.
+
+Voici le résultat codé :
+
+<img width="100%" src="visuals/exemple_arrondi.svg">
+
+Remarquez le motif périodique de longueur 4.
+
+Nous pouvons aisément calculer la valeur à laquelle correspond ce nombre arrondi, en utilisant la méthode décrite dans la section précédente. Ensuite, nous pouvons faire la différence avec notre valeur de départ pour obtenir l'erreur d'imprécision.
+
+Pour ce nombre, la mantisse est égale à 1.0999999046325684 et l'exposant est -1.
+Ainsi, la valeur codée est égale à 1.0999999046325684/2 soit 0.5499999523162842. L'écart avec le nombre de départ est donc de 0.0000000476837158.
+Même pour de la simple précision, l'erreur reste très faible. Cependant, pour des nombres plus grands, l'erreur peut être plus importante.
