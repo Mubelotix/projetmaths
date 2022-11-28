@@ -180,7 +180,7 @@ Cette norme offre deux représentations pour les nombres flottants suivant la pr
 
 L'allocation des bits est la suivante:
 
-<img src="visuals/bit_allocation.svg">
+<img width="100%" src="visuals/bit_allocation.svg">
 
 La lecture et l'interprétation des trois parties est la première étape pour décoder un nombre flottant.
 
