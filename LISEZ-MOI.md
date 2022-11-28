@@ -174,20 +174,62 @@ Terminé!
 
 A chaque étape, le programme affiche la matrice `B` puis `A`, accompangée des opérations qui seront effectuées sur les lignes pour passer à l'étape suivante.
 
-## Bordel à trier
+## Nombres flottants et norme IEEE 754
 
-simple précision vs double précision 
-suite binaire
-mantisse est une suite de m1 m2 jusqu'à m23
-fl(x) = X
-X = + ou - m*2pow(evrai)
-m est compris entre 1 et 2 (c'est la normalisation)
-m est la somme de i = 0 à 23 de mi/2powi
-m0 = 1 donc on ne le code pas (bit caché)
+Cette norme offre deux représentations pour les nombres flottants suivant la précision souhaitée. La simple précision utilise 32 bits tandis que la double précision en utilise 64. Afin de garder les explications simples, nous nous limiterons à la simple précision, mais les mêmes principes pourraient être appliqués aux nombres flottants en double précision.
 
-l'exposant codé est la somme de i=0 à 7 de ei*powi
-on a un biais pour passer des positifs en négatifs on a 2pow8 nombres donc on veut 2pow7 négatifs 127 négatifs 
-le vrai exposant est l'exposant codé moins le biais
+L'allocation des bits est la suivante:
+
+<img src="visuals/bit_allocation.svg">
+
+La lecture et l'interprétation des trois parties est la première étape pour décoder un nombre flottant.
+
+### Signe
+
+<!-- 
+\left\{\begin{matrix}
+signe = -1 \; \; \; \; \; \; \; \; \; si \; s = 1 \\
+signe = +1 \; \; \; \; \; \; \; \; \; si \; s = 0 
+\end{matrix}\right.
+-->
+
+Le bit de signe est le premier bit de la représentation. Il est égal à 0 pour les nombres positifs et 1 pour les nombres négatifs.
+
+<img src="https://latex.codecogs.com/svg.image?\left\{\begin{matrix}signe&space;=&space;-1&space;\;&space;\;&space;\;&space;\;&space;\;&space;\;&space;\;&space;\;&space;\;&space;si&space;\;&space;s&space;=&space;1&space;\\signe&space;=&space;&plus;1&space;\;&space;\;&space;\;&space;\;&space;\;&space;\;&space;\;&space;\;&space;\;&space;si&space;\;&space;s&space;=&space;0&space;\end{matrix}\right.">
+
+### Exposant
+
+L'exposant codé est une valeur entière classique sur huit bits.
+
+<!-- exposant_{code} = \sum_{0}^{7}{ e_{i}*2^{7-i}} -->
+
+<img src="https://latex.codecogs.com/svg.image?exposant_{code}&space;=&space;\sum_{0}^{7}{&space;e_{i}*2^{7-i}}">
+
+Comme l'exposant réel a parfois besoin d'être négatif et que l'exposant codé ne permet de représenter que les nombres de 0 à 255, il est nécessaire de décaler l'exposant codé d'un biais pour obtenir la valeur réelle de l'exposant. En simple précision, le biais est de 127. Ainsi, l'exposant a une valeur réelle comprise entre -127 et 128.
+
+<!-- exposant = exposant_{code} - 127 -->
+
+<img src="https://latex.codecogs.com/svg.image?exposant&space;=&space;exposant_{code}&space;-&space;127">
+
+### Mantisse
+
+La mantisse codée est une suite binaire allant de m0 à m23. Le premier élément m0 n'est pas codé, car il vaut toujours 1. On l'appelle le bit caché. La valeur réelle de la mantisse est définie de la sorte :
+
+<!-- mantisse = \sum_{0}^{23}\frac{m_{i}}{2^{i}} -->
+
+<img src="https://latex.codecogs.com/svg.image?mantisse&space;=&space;\sum_{0}^{23}\frac{m_{i}}{2^{i}}">
+
+Ainsi, la valeur de la mantisse est comprise entre 1 et 2. Elle est dite normalisée.
+
+### Valeur du nombre
+
+Ayant défini les valeurs des trois parties, il est possible de calculer la valeur du nombre flottant.
+
+<!-- X = signe * mantisse * 2^{exposant} -->
+
+<img src="https://latex.codecogs.com/svg.image?X&space;=&space;signe&space;*&space;mantisse&space;*&space;2^{exposant}">
+
+Vous remarquerez la proximité entre le principe de la virgule flottante et l'écriture scientifique des nombres. La principale différence étant la base utilisée.
 
 montrer comment on obtient m1, puis m2...
 on prend la partie entière, on multiplie par 2, on prend la partie entière... 

@@ -1,0 +1,111 @@
+<svg fill="none" xmlns="http://www.w3.org/2000/svg">
+	<foreignObject width="100%" height="100%">
+		<div id="body" xmlns="http://www.w3.org/1999/xhtml">
+            <style>
+                * {
+                    margin: 0;
+                    padding: 0;
+                }
+
+                #body {
+                    width: 70rem;
+                    margin: 2rem;
+                    position: relative;
+                    border-left: 1px solid black;
+                }
+
+                #bitset {
+                    display: flex;
+                    flex-direction: row;
+                    width: 100%;
+                }
+
+                .bit {
+                    width: 2rem;
+                    height: calc(1.618rem * 2);
+                    border: 1px solid black;
+                    border-left: none;
+                    text-align: center;
+                    line-height: calc(1.618rem * 2);
+                }
+
+                .sign {
+                    background-color: #b3d9ff;
+                }
+
+                .exponent {
+                    background-color: #b3ffb3;
+                }
+
+                .mantissa {
+                    background-color: #ffcccc;
+                }
+
+                #sign-text {
+                    position: absolute;
+                    top: 3.5rem;
+                    left: -.5rem;
+                    color: #000099;
+                    font-size: 1.5rem;
+                }
+
+                #exponent-text {
+                    position: absolute;
+                    top: 3.5rem;
+                    left: 2rem;
+                    width: calc(8 * (2rem + 1px));
+                    text-align: center;
+                    color: #006600;
+                    font-size: 1.5rem;
+                }
+
+                #mantissa-text {
+                    position: absolute;
+                    top: 3.5rem;
+                    left: calc(2rem + 8 *  (2rem + 1px));
+                    width: calc(23 *  (2rem + 1px));
+                    text-align: center;
+                    color: #990000;
+                    font-size: 1.5rem;
+                }
+			</style>
+            <div id="bitset">
+                <div class="bit sign">s</div>
+                <div class="bit exponent">e0</div>
+                <div class="bit exponent">e1</div>
+                <div class="bit exponent">e2</div>
+                <div class="bit exponent">e3</div>
+                <div class="bit exponent">e4</div>
+                <div class="bit exponent">e5</div>
+                <div class="bit exponent">e6</div>
+                <div class="bit exponent">e7</div>
+                <div class="bit mantissa">m1</div>
+                <div class="bit mantissa">m2</div>
+                <div class="bit mantissa">m3</div>
+                <div class="bit mantissa">m4</div>
+                <div class="bit mantissa">m5</div>
+                <div class="bit mantissa">m6</div>
+                <div class="bit mantissa">m7</div>
+                <div class="bit mantissa">m8</div>
+                <div class="bit mantissa">m9</div>
+                <div class="bit mantissa">m10</div>
+                <div class="bit mantissa">m11</div>
+                <div class="bit mantissa">m12</div>
+                <div class="bit mantissa">m13</div>
+                <div class="bit mantissa">m14</div>
+                <div class="bit mantissa">m15</div>
+                <div class="bit mantissa">m16</div>
+                <div class="bit mantissa">m17</div>
+                <div class="bit mantissa">m18</div>
+                <div class="bit mantissa">m19</div>
+                <div class="bit mantissa">m20</div>
+                <div class="bit mantissa">m21</div>
+                <div class="bit mantissa">m22</div>
+                <div class="bit mantissa">m23</div>
+            </div>
+            <div id="sign-text">signe</div>
+            <div id="exponent-text">8 bits d'exposant</div>
+            <div id="mantissa-text">23 bits de mantisse</div>
+		</div>
+	</foreignObject>
+</svg>
