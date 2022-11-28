@@ -284,14 +284,17 @@ L'opération peut être répétée 24 fois au maximum (23 bits de mantisse + 1 b
 0.8 * 2 = 1.6 \\
 1.6 \geqslant 1 \to {\color{Red} 1} \\
 1.6 - 1 = 0.6 \\
+\end{matrix}\right\}{cycle} \\
+\\
 \\
 0.6 * 2 = 1.2 \\
 1.2 \geqslant 1 \to {\color{Red} 1} \\
 1.2 - 1 = 0.2 \\
-\end{matrix}\right\}{cycle}
+\\
+\cdots 
 -->
 
-<img src="https://latex.codecogs.com/svg.image?\\0.55&space;*&space;2&space;=&space;1.1&space;\\1.1&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.1&space;-&space;1&space;=&space;0.1&space;\\\\\left.\begin{matrix}0.1&space;*&space;2&space;=&space;0.2&space;\\0.2&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.2&space;*&space;2&space;=&space;0.4&space;\\0.4&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.4&space;*&space;2&space;=&space;0.8&space;\\0.8&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.8&space;*&space;2&space;=&space;1.6&space;\\1.6&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.6&space;-&space;1&space;=&space;0.6&space;\\\\0.6&space;*&space;2&space;=&space;1.2&space;\\1.2&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.2&space;-&space;1&space;=&space;0.2&space;\\\end{matrix}\right\}{cycle}">
+<img src="https://latex.codecogs.com/svg.image?\\0.55&space;*&space;2&space;=&space;1.1&space;\\1.1&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.1&space;-&space;1&space;=&space;0.1&space;\\\\\left.\begin{matrix}0.1&space;*&space;2&space;=&space;0.2&space;\\0.2&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.2&space;*&space;2&space;=&space;0.4&space;\\0.4&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.4&space;*&space;2&space;=&space;0.8&space;\\0.8&space;\leqslant&space;1&space;\to&space;{\color{Red}&space;0}&space;\\\\0.8&space;*&space;2&space;=&space;1.6&space;\\1.6&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.6&space;-&space;1&space;=&space;0.6&space;\\\end{matrix}\right\}{cycle}&space;\\\\\\0.6&space;*&space;2&space;=&space;1.2&space;\\1.2&space;\geqslant&space;1&space;\to&space;{\color{Red}&space;1}&space;\\1.2&space;-&space;1&space;=&space;0.2&space;\\\\\cdots&space;">
 
 Au cours de la recherche de la mantisse, nous tombons sur une valeur qui a déjà été rencontrée précédemment. Si l'on continuait, on constaterait une répétition sur les prochains chiffres également. Nous rencontrons ici une boucle infinie, ce qui signifie que le développement binaire de 0,55 est infini, et que 0,55 a besoin d'une infinité de chiffres après la virgule pour être représenté. Comme nous ne pouvons stocker que les 23 premiers chiffres, il y aura donc forcément une erreur d'imprécision.
 
