@@ -18,7 +18,7 @@ procedure output_data(data: InputData);
 
 implementation
 
-function read_integer(line: String; var cursor: Integer): LongInt;
+function read_integer(line: String; var cursor: Integer): Int64;
 var start, len: Integer;
     str: String;
 begin
@@ -49,7 +49,7 @@ begin
 end;
 
 function read_number(line: String; var cursor: Integer): Number;
-var num, den: LongInt;
+var num, den: Int64;
 begin
     // Lit le numérateur
     num := read_integer(line, cursor);
