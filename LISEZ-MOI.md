@@ -21,10 +21,10 @@ Le coeur du programme réside dans `matrix.pas`. A la fin de ce fichier se trouv
 Le programme a été testé avec succès sur les machines suivantes :
 
 - Machine de l'INSA
-    - Processeur: Intel
-    - OS: Ubuntu
-    - Compilateur: FPC
-    - IDE: VsCodium + FPC
+    - Processeur: Intel Core i7-9700
+    - OS: Ubuntu 22.04 (Linux 5.15.0-53-generic)
+    - Compilateur: FPC 3.2.2
+    - IDE: VsCodium 1.73.1 + FPC 3.2.2
 
 - Machine personnelle
     - Processeur: Intel Core i7-6700HQ
