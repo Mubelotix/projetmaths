@@ -1,3 +1,4 @@
 *.o
 *.ppu
 main
+*_sortie.txt
