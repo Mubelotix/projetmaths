@@ -5,11 +5,11 @@ interface
 
     type Number = object
         public
-            num: Integer;
-            den: Integer;
-            constructor init(new_num, new_den: Integer);
+            num: LongInt;
+            den: LongInt;
+            constructor init(new_num, new_den: LongInt);
             constructor init_zero();
-            constructor init_int(new_num: Integer);
+            constructor init_int(new_num: LongInt);
             procedure beautify();
             function to_string(): String;
             function invert(): Number;
@@ -20,7 +20,7 @@ interface
             function divide(other: Number): Number;
     end;
 
-    function greatestCommonDivisor(a, b: Integer): Integer;
+    function greatestCommonDivisor(a, b: LongInt): LongInt;
 implementation
 
 constructor Number.init_zero();
@@ -28,19 +28,19 @@ begin
     self.init_int(0);
 end;
 
-constructor Number.init_int(new_num: Integer);
+constructor Number.init_int(new_num: LongInt);
 begin
     self.init(new_num, 1);
 end;
 
-constructor Number.init(new_num, new_den: Integer);
+constructor Number.init(new_num, new_den: LongInt);
 begin
     self.num := new_num;
     self.den := new_den;
 end;
 
 // Took from https://wiki.freepascal.org/Greatest_common_divisor
-function greatestCommonDivisor(a, b: Integer): Integer;
+function greatestCommonDivisor(a, b: LongInt): LongInt;
 begin
     // only works with positive integers
     if (a < 0) then a := -a;
@@ -58,7 +58,7 @@ begin
 end;
 
 procedure Number.beautify();
-var gcd: Integer;
+var gcd: LongInt;
 begin
     if self.num = 0 then
         self.den := 1;
