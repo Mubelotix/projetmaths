@@ -158,27 +158,27 @@ implementation
     begin
         write('┌');
         for x := 0 to size-1 do
-            write('    ');
+            write('      ');
         writeln('  ┐');
         for y := 0 to size-1 do begin
             write('│');
             for x := 0 to size-1 do begin
-                write(padleft(data[x][y].to_string(), 3), ' ');
+                write(padleft(data[x][y].to_string(), 5), ' ');
             end;
             writeln('  │');
         end;
         write('└');
         for x := 0 to size-1 do
-            write('    ');
+            write('      ');
         writeln('  ┘');
     end;
     procedure ColumnMatrix.display();
     var y: Integer;
     begin
-        writeln('┌      ┐');
+        writeln('┌        ┐');
         for y := 0 to size-1 do
-            writeln('│', padleft(data[y].to_string(), 3), '   │');
-        writeln('└      ┘');
+            writeln('│', padleft(data[y].to_string(), 5), '   │');
+        writeln('└        ┘');
     end;
 
     // Applique l'algorithme du pivot de Gauss à la matrice.
@@ -206,7 +206,7 @@ implementation
                 n := a.data[step][y].divide(a.data[step][step]);
 
                 // Log si dans le terminal
-                if isatty(output)=1 then GotoXY(7+4*a.size, char_pos - a.size - 1 + y);
+                if isatty(output)=1 then GotoXY(7+6*a.size, char_pos - a.size - 1 + y);
                 if isatty(output)=1 then write('L', y+1, ' ← L', y+1, ' - ', n.to_string(), ' * L', step+1);
 
                 // Application
