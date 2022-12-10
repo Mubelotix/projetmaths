@@ -62,10 +62,8 @@ implementation
         // Init values
         size := demanded_size;
         for x := 0 to size-1 do
-            for y := 0 to size-1 do begin
-                data[x][y].num := 0;
-                data[x][y].den := 1;
-            end;
+            for y := 0 to size-1 do
+                data[x][y].init_zero();
     end;
     constructor ColumnMatrix.init(demanded_size: integer);
     var y: Integer;
@@ -82,10 +80,8 @@ implementation
         
         // Init values
         size := demanded_size;
-        for y := 0 to size-1 do begin
-            data[y].num := 0;
-            data[y].den := 1;
-        end;
+        for y := 0 to size-1 do
+            data[y].init_zero();
     end;
 
     // Retourne la taille
@@ -199,8 +195,8 @@ implementation
             for y := step+1 to a.size-1 do begin
                 // On veut obtenir `data[step][y] = 0` en ajoutant `n` multiples de la ligne `step`
                 // On doit donc résoudre `data[step][y] + n * data[step][step] = 0`
-                if a.data[step][step].num = 0 then begin
-                    writeln('FATAL: the matrix is not invertible.');
+                if a.data[step][step].is_zero() then begin
+                    writeln('FATAL: La matrice n''est pas inversible!');
                     halt;
                 end;
                 n := a.data[step][y].divide(a.data[step][step]);
