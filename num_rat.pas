@@ -1,3 +1,10 @@
+// Ce fichier contient l'implémentation de l'abstraction Number utilisant des nombres rationnels.
+// Pour que cette implémentation soit utilisée, veuillez créer un lien symbolique nommé "num.pas" vers ce fichier :
+//
+// rm num.pas && ln -s num_rat.pas num.pas
+// 
+// Le programme devra être recompilé.
+
 unit num;
 
 interface
