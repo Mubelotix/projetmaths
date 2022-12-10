@@ -11,7 +11,7 @@ projetmaths/
 ├─ io.pas               (gère l'entrée/sortie)
 ├─ main.pas             (point d'entrée du programme)
 ├─ matrix.pas           (gère la logique des matrices)
-├─ num_rational.pas     (implémentation avec des nombres rationnels)
+├─ num_rat.pas          (implémentation avec des nombres rationnels)
 ├─ num_fp.pas           (implémentation avec des nombres flottants)
 └─ num.pas              (lien symbolique vers l'un des deux fichiers précédents)
 ```
@@ -176,3 +176,35 @@ Terminé!
 
 A chaque étape, le programme affiche la matrice `B` puis `A`, accompangée des opérations qui seront effectuées sur les lignes pour passer à l'étape suivante.
 
+## Nombres flottants ou rationnels ?
+
+Ce programme est capable de traiter des nombres rationnels ainsi que des nombres flottants.
+
+A cette fin, un objet `Number` est défini et offre une interface commune pour les deux types de nombres, de telle manière à faire abstraction des détails de représentation dans l'algorithme de résolution.
+
+Une implémentation de `Number` utilisant des nombres flottants en double précision se trouve dans le fichier `num_fp.pas`.
+Une implémentation de `Number` utilisant des nombres rationnels se trouve dans le fichier `num_rat.pas`.
+Un lien symbolique `num.pas` pointe vers l'une des deux implémentations.
+La sélection de l'implémentation à utiliser se fait donc en modifiant le lien symbolique avant la compilation.
+
+Par défaut, les nombres rationnels sont utilisés.
+
+Voici la commande pour utiliser les nombres flottants:
+
+```sh
+rm num.pas && ln -s num_fp.pas num.pas
+```
+
+Et voici la commande pour utiliser les nombres rationnels:
+
+```sh
+rm num.pas && ln -s num_rat.pas num.pas
+```
+
+Il est **nécessaire** de recompiler le programme après avoir modifié le lien symbolique.
+
+Le format d'entrée des données est exactement le même pour les deux implémentations. En entrée, les nombres doivent être écrits sous forme rationnelle. Ainsi, `0.5` n'est pas supporté et doit être écrit `1/2`. Si les nombres flottants sont utilisés, ils seront directement convertis après lecture.
+
+Le format de sortie des données est globalement le même, mais ici les nombres flottants sont écrits avec un point. Ainsi, `1/2` sera écrit `0.5` si les nombres flottants sont utilisés et `1/2` si les nombres rationnels sont utilisés.
+
+L'intérêt de l'utilisation d'une implémentation ou d'une autre est traité dans le rapport.
