@@ -203,7 +203,10 @@ implementation
 
                 // Log si dans le terminal
                 if isatty(output)=1 then GotoXY(7+6*a.size, char_pos - a.size - 1 + y);
-                if isatty(output)=1 then write('L', y+1, ' ← L', y+1, ' - ', n.to_string(), ' * L', step+1);
+                if isatty(output)=1 then
+                    write('L', y+1, ' ← L', y+1, ' - ', n.to_string(), ' * L', step+1)
+                else
+                    n.to_string(); // Utile car déclenche une simplification avec PGCD sur les rationnels ce qui réduit le risque de dépassement de capacité
 
                 // Application
                 for x := step to a.size-1 do
