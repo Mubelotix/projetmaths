@@ -2,7 +2,7 @@ unit io;
 
 interface
 
-uses fraction, matrix, sysutils;
+uses num, matrix, sysutils;
 
 // Ce qui est lu en entrée du programme
 type InputData = record

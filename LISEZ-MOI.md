@@ -8,10 +8,12 @@ Le code est divisé en quatre fichiers :
 
 ```
 projetmaths/
-├─ fraction.pas         (gère la logique des nombres rationnels)
 ├─ io.pas               (gère l'entrée/sortie)
 ├─ main.pas             (point d'entrée du programme)
-└─ matrix.pas           (gère la logique des matrices)
+├─ matrix.pas           (gère la logique des matrices)
+├─ num_rational.pas     (implémentation avec des nombres rationnels)
+├─ num_fp.pas           (implémentation avec des nombres flottants)
+└─ num.pas              (lien symbolique vers l'un des deux fichiers précédents)
 ```
 
 Le coeur du programme réside dans `matrix.pas`. A la fin de ce fichier se trouve la fonction d'application de la méthode de Gauss sur des matrices.

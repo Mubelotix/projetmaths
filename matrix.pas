@@ -3,7 +3,7 @@ unit matrix;
 
 interface
 
-    uses crt, fraction, strutils, termio;
+    uses crt, num, strutils, termio;
 
     // Largeur maximale d'une matrice. Elle peut donc contenir un minimum de MAX_WIDTH*MAX_WIDTH éléments.
     const MAX_WIDTH = 10;

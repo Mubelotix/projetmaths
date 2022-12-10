@@ -1,6 +1,6 @@
 program linear_equation_solver;
 
-uses matrix, fraction, sysutils, crt, termio, io;
+uses matrix, num, sysutils, crt, termio, io;
 
 var data: InputData;
 

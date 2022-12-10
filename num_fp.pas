@@ -1,4 +1,4 @@
-unit fraction;
+unit num;
 
 interface
     uses sysutils;
