@@ -2,6 +2,8 @@
 
 Ce programme peut être utilisé pour la résolution de systèmes linéaires en le représentant sous la forme `AX = B` où `A` est une matrice carrée et `B` est une matrice colonne correspondant au second membre du système.
 
+Le projet est accessible sur [GitHub](https://github.com/Mubelotix/projetmaths).
+
 ## Organisation du code
 
 Le code est divisé en quatre fichiers :
