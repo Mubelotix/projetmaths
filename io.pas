@@ -69,10 +69,8 @@ end;
 function read_input_data(): InputData;
 var line: String;
     size: Integer;
-    cursor, start, len: Integer;
+    cursor: Integer;
     x, y: Integer;
-    str: String;
-    fraction: Number;
 begin
     readln(size);
     read_input_data.a.init(size);
