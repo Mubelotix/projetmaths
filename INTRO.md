@@ -1,3 +1,5 @@
+Ceci est la version en markdown de la partie informatique du rapport.
+
 ## Nombres flottants et norme IEEE 754
 
 Cette norme offre deux représentations pour les nombres flottants suivant la précision souhaitée. La simple précision utilise 32 bits tandis que la double précision en utilise 64. Afin de garder les explications simples, nous nous limiterons à la simple précision, mais les mêmes principes pourraient être appliqués aux nombres flottants en double précision.
@@ -132,6 +134,30 @@ Remarquez le motif périodique de longueur 4.
 
 Nous pouvons aisément calculer la valeur à laquelle correspond ce nombre arrondi, en utilisant la méthode décrite dans la section précédente. Ensuite, nous pouvons faire la différence avec notre valeur de départ pour obtenir l'erreur d'imprécision.
 
-Pour ce nombre, la mantisse est égale à 1.0999999046325684 et l'exposant est -1.
-Ainsi, la valeur codée est égale à 1.0999999046325684/2 soit 0.5499999523162842. L'écart avec le nombre de départ est donc de 0.0000000476837158.
-Même pour de la simple précision, l'erreur reste très faible. Cependant, pour des nombres plus grands, l'erreur peut être plus importante.
+Cherchons X le nombre réellement codé par le flottant ci-dessus.
+
+<!-- X = 2^{-1}\times (2^{0} + 2^{-4} + 2^{-5} + 2^{-8} + 2^{-9} + 2^{-12} + 2^{-13} + 2^{-16} + 2^{-17} + 2^{-20} + 2^{-21}) -->
+<img src="https://latex.codecogs.com/svg.image?X&space;=&space;2^{-1}\times&space;(2^{0}&space;&plus;&space;2^{-4}&space;&plus;&space;2^{-5}&space;&plus;&space;2^{-8}&space;&plus;&space;2^{-9}&space;&plus;&space;2^{-12}&space;&plus;&space;2^{-13}&space;&plus;&space;2^{-16}&space;&plus;&space;2^{-17}&space;&plus;&space;2^{-20}&space;&plus;&space;2^{-21})">
+
+Nous pouvons donc calculer la valeur rationnelle exacte de X.
+En prévision de la prochaine étape, nous allons multiplier le numérateur et dénominateur de X par 5.
+
+<!-- X = \frac{2306867}{4194304} = \frac{2306867\times 5}{4194304\times 5} = \frac{11534335}{20971520} -->
+<img src="https://latex.codecogs.com/svg.image?X&space;=&space;\frac{2306867}{4194304}&space;=&space;\frac{2306867\times&space;5}{4194304\times&space;5}&space;=&space;\frac{11534335}{20971520}">
+
+Mettons la valeur originale x = 0.55 sous le même dénominateur.
+
+<!-- x = 0.55 = \frac{0.55 \times  20971520}{20971520} = \frac{11534336}{20971520} -->
+<img src="https://latex.codecogs.com/svg.image?x&space;=&space;0.55&space;=&space;\frac{0.55&space;\times&space;&space;20971520}{20971520}&space;=&space;\frac{11534336}{20971520}">
+
+On a bien deux nombres différents.
+
+<!-- X = \frac{11534335}{20971520} \neq  \frac{11534336}{20971520} = x -->
+<img src="https://latex.codecogs.com/svg.image?X&space;=&space;\frac{11534335}{20971520}&space;\neq&space;&space;\frac{11534336}{20971520}&space;=&space;x">
+
+Nous pouvons finalement calculer l'erreur d'imprécision.
+
+<!-- x - X = \frac{11534336}{20971520} - \frac{11534335}{20971520} = \frac{1}{20971520} -->
+<img src="https://latex.codecogs.com/svg.image?x&space;-&space;X&space;=&space;\frac{11534336}{20971520}&space;-&space;\frac{11534335}{20971520}&space;=&space;\frac{1}{20971520}">
+
+On remarque que même pour de la simple précision, l'erreur reste très faible. Cependant, comme elle est relative, il faut s'attendre à ce qu'elle soit bien plus élevée pour des nombres plus grands. Par exemple dans mon expèrience, des valeurs entières sur 64 bits ne peuvent être représentées même en double précision qu'avec un arrondi à plusieurs milliers près. Il est considéré comme imprudent d'essayer de stocker des nombres entiers supérieurs à 2^53 en double précision. En dessous de cette valeur, les arrondis ne dépassent jamais 1.
