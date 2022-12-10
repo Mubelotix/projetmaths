@@ -65,8 +65,6 @@ Un exemple d'entrée se trouve dans le fichier `gauss_exemple_entree.txt`. Voici
 8               (ligne 3 de B)
 ```
 
-Il est conseillé de suffixer le fichier d'entrée par `_entree.txt`.
-
 ### Sortie
 
 La sortie suit le même format que l'entrée.
@@ -74,10 +72,18 @@ Le programme retourne les deux matrices `A` et `B` après application de la mét
 Nous pouvons donc y retrouver un second membre ainsi que la solution.
 Vous noterez que la matrice `A` est maintenant une matrice triangulaire supérieure. Ainsi, tous les coefficients de `A` en dessous de la diagonale sont nuls.
 
-Il est conseillé de suffixer le fichier de sortie par `_sortie.txt`.
-
 Si vous ne spécifiez pas de redirection de sortie, le programme affichera des informations concernant les calculs effectués au cours de l'application de la méthode de Gauss.
 Ceci peut être utile pour comprendre le fonctionnement du programme étape par étape.
+
+### Nomenclature
+
+Il est conseillé de suffixer le fichier d'entrée par `_entree.txt` et celui de sortie par `_sortie.txt`.
+
+Vous trouverez un fichier d'entrée et de sortie pour chacune de nos trois applications ainsi que pour notre exemple :
+- `gauss_exemple_entree.txt` et `gauss_exemple_sortie.txt`
+- `application_chimie_entree.txt` et `application_chimie_sortie.txt`
+- `application_economie_entree.txt` et `application_economie_sortie.txt`
+- `application_physique_entree.txt` et `application_physique_sortie.txt`
 
 ## Exemple d'utilisation
 
@@ -207,4 +213,4 @@ Le format d'entrée des données est exactement le même pour les deux implémen
 
 Le format de sortie des données est globalement le même, mais ici les nombres flottants sont écrits avec un point. Ainsi, `1/2` sera écrit `0.5` si les nombres flottants sont utilisés et `1/2` si les nombres rationnels sont utilisés.
 
-L'intérêt de l'utilisation d'une implémentation ou d'une autre est traité dans le rapport.
+L'intérêt de l'utilisation d'une implémentation ou d'une autre est traité dans le rapport. Vous remarquerez que pour l'application d'économie, les nombres flottants ont été utilisés en raison du risque de débordement causé par les grands nombres utilisés.
