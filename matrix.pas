@@ -19,9 +19,9 @@ interface
         public
             constructor init(demanded_size: integer);
             function get_size(): Integer;
-            procedure set_fraction(x, y: Integer; frac: Number);
-            function get_fraction(x, y: Integer): Number;
-            procedure set_value(x, y: Integer; value: Integer);
+            procedure set_value(x, y: Integer; value: Number);
+            function get_value(x, y: Integer): Number;
+            procedure set_value_int(x, y: Integer; value: Integer);
             procedure display();
     end;
 
@@ -35,9 +35,9 @@ interface
         public
             constructor init(demanded_size: integer);
             function get_size(): Integer;
-            procedure set_fraction(y: Integer; frac: Number);
-            function get_fraction(y: Integer): Number;
-            procedure set_value(y: Integer; value: Integer);
+            procedure set_value(y: Integer; value: Number);
+            function get_value(y: Integer): Number;
+            procedure set_value_int(y: Integer; value: Integer);
             procedure display();
     end;
 
@@ -95,43 +95,43 @@ implementation
     end;
 
     // Modifie la valeur d'une case de la matrice.
-    procedure SquareMatrix.set_fraction(x, y: Integer; frac: Number);
+    procedure SquareMatrix.set_value(x, y: Integer; value: Number);
     begin
         if (x < 0) or (x >= size) or (y < 0) or (y >= size) then begin
             writeln('Error: the coordinates are out of the matrix.');
             halt;
         end;
-        data[x][y] := frac;
+        data[x][y] := value;
     end;
-    procedure ColumnMatrix.set_fraction(y: Integer; frac: Number);
+    procedure ColumnMatrix.set_value(y: Integer; value: Number);
     begin
         if (y < 0) or (y >= size) then begin
             writeln('Error: the coordinates are out of the matrix.');
             halt;
         end;
-        data[y] := frac;
+        data[y] := value;
     end;
 
     // Retourne la valeur d'une case de la matrice.
-    function SquareMatrix.get_fraction(x, y: Integer): Number;
+    function SquareMatrix.get_value(x, y: Integer): Number;
     begin
         if (x < 0) or (x >= size) or (y < 0) or (y >= size) then begin
             writeln('Error: the coordinates are out of the matrix.');
             halt;
         end;
-        get_fraction := data[x][y];
+        get_value := data[x][y];
     end;
-    function ColumnMatrix.get_fraction(y: Integer): Number;
+    function ColumnMatrix.get_value(y: Integer): Number;
     begin
         if (y < 0) or (y >= size) then begin
             writeln('Error: the coordinates are out of the matrix.');
             halt;
         end;
-        get_fraction := data[y];
+        get_value := data[y];
     end;
 
     // Modifie la valeur d'une case de la matrice.
-    procedure SquareMatrix.set_value(x, y: Integer; value: Integer);
+    procedure SquareMatrix.set_value_int(x, y: Integer; value: Integer);
     begin
         if (x < 0) or (x >= size) or (y < 0) or (y >= size) then begin
             writeln('Error: the coordinates are out of the matrix.');
@@ -139,7 +139,7 @@ implementation
         end;
         data[x][y].init_int(value);
     end;
-    procedure ColumnMatrix.set_value(y: Integer; value: Integer);
+    procedure ColumnMatrix.set_value_int(y: Integer; value: Integer);
     begin
         if (y < 0) or (y >= size) then begin
             writeln('Error: the coordinates are out of the matrix.');

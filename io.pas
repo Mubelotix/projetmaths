@@ -80,13 +80,13 @@ begin
         readln(line);
         cursor := 1;
         for x := 0 to size - 1 do
-            read_input_data.a.set_fraction(x, y, read_number(line, cursor));
+            read_input_data.a.set_value(x, y, read_number(line, cursor));
     end;
 
     for y := 0 to size - 1 do begin
         readln(line);
         cursor := 1;
-        read_input_data.b.set_fraction(y, read_number(line, cursor));
+        read_input_data.b.set_value(y, read_number(line, cursor));
     end;
 end;
 
@@ -97,11 +97,11 @@ begin
     writeln(size);
     for y := 0 to size - 1 do begin
         for x := 0 to size - 1 do
-            write(data.a.get_fraction(x, y).to_string(), ' ');
+            write(data.a.get_value(x, y).to_string(), ' ');
         writeln();
     end;
     for y := 0 to size - 1 do
-        writeln(data.b.get_fraction(y).to_string());
+        writeln(data.b.get_value(y).to_string());
 end;
 
 end.
