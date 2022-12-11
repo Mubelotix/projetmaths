@@ -49,7 +49,7 @@ Notons `n` la taille de `A` et `B`.
 
 L'entrée est composée de plusieurs lignes:
 - La première ligne contient l'entier `n`, taille de `A` et `B`.
-- Les `n` lignes suivantes contienent chacune `n` nombres rationnels séparés par des espaces. Ces nombres sont les coefficients de la matrice `A`.
+- Les `n` lignes suivantes contiennent chacune `n` nombres rationnels séparés par des espaces. Ces nombres sont les coefficients de la matrice `A`.
 - Les `n` lignes suivantes contiennent chacune un unique nombre rationnel. Ces nombres sont les coefficients de la matrice `B`.
 
 Le numérateur et le dénominateur des nombres rationnels sont séparés par un slash `/`.
