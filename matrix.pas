@@ -179,11 +179,13 @@ implementation
 
     // Applique l'algorithme du pivot de Gauss à la matrice.
     procedure apply_gauss(var a: SquareMatrix; var b: ColumnMatrix);
-    var step, y, x: Integer;
+    var step, y, x, y2: Integer;
     var n: Number;
     var char_pos: Integer;
+    var non_zero_line: Integer;
     begin
-        for step := 0 to a.size-2 do begin
+        step := 0;
+        while step <= a.size-2 do begin
             // Log si dans le terminal
             if isatty(output)=1 then begin
                 writeln('Step ', step, ' :');
@@ -192,20 +194,45 @@ implementation
                 char_pos := WhereY();
             end;
 
+            // Vérifions que le pivot n'est pas nul
+            if a.data[step][step].is_zero() then begin
+                // Trouvons une ligne au pivot non nul pour remplacer celle-ci
+                non_zero_line := -1;
+                for y2 := step+1 to a.size-1 do
+                    if not a.data[step][y2].is_zero() then
+                        non_zero_line := y2;
+
+                // Si aucune n'est trouvée, on peut juste continuer
+                if non_zero_line = -1 then begin
+                    step := step + 1;
+                    continue;
+                end;
+                
+                // Sinon on permute les lignes step et non_zero_line
+                if isatty(output)=1 then begin
+                    GotoXY(7+6*a.size, char_pos - a.size - 1 + step);
+                    write('L', step + 1, ' ↔ L', non_zero_line + 1);
+                end;
+                for x := 0 to a.size-1 do begin
+                    n := a.data[x][step];
+                    a.data[x][step] := a.data[x][non_zero_line];
+                    a.data[x][non_zero_line] := n;
+                end;
+                n := b.data[step];
+                b.data[step] := b.data[non_zero_line];
+                b.data[non_zero_line] := n;
+            end;
+
             for y := step+1 to a.size-1 do begin
                 // On veut obtenir `data[step][y] = 0` en ajoutant `n` multiples de la ligne `step`
                 // On doit donc résoudre `data[step][y] + n * data[step][step] = 0`
-                if a.data[step][step].is_zero() then begin
-                    writeln('FATAL: La matrice n''est pas inversible!');
-                    halt;
-                end;
                 n := a.data[step][y].divide(a.data[step][step]);
 
                 // Log si dans le terminal
-                if isatty(output)=1 then GotoXY(7+6*a.size, char_pos - a.size - 1 + y);
-                if isatty(output)=1 then
-                    write('L', y+1, ' ← L', y+1, ' - ', n.to_string(), ' * L', step+1)
-                else
+                if isatty(output)=1 then begin
+                    GotoXY(7+6*a.size, char_pos - a.size - 1 + y);
+                    write('L', y+1, ' ← L', y+1, ' - ', n.to_string(), ' * L', step+1);
+                end else
                     n.to_string(); // Utile car déclenche une simplification avec PGCD sur les rationnels ce qui réduit le risque de dépassement de capacité
 
                 // Application
@@ -214,6 +241,8 @@ implementation
                 b.data[y] := b.data[y].substract(n.multiply(b.data[step]));
             end;
             if isatty(output)=1 then GotoXY(1, char_pos);
+            
+            step := step + 1;
         end;
     end;
 end.

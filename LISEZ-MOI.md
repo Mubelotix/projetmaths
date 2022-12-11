@@ -6,7 +6,7 @@ Le projet est accessible sur [GitHub](https://github.com/Mubelotix/projetmaths).
 
 ## Organisation du code
 
-Le code est divisé en quatre fichiers :
+Le code est divisé en unités :
 
 ```
 projetmaths/
