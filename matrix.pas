@@ -180,6 +180,7 @@ implementation
     // Applique l'algorithme du pivot de Gauss à la matrice.
     procedure apply_gauss(var a: SquareMatrix; var b: ColumnMatrix);
     var step, y, x, y2: Integer;
+    var pivot: Number;
     var n: Number;
     var char_pos: Integer;
     var non_zero_line: Integer;
@@ -195,7 +196,8 @@ implementation
             end;
 
             // Vérifions que le pivot n'est pas nul
-            if a.data[step][step].is_zero() then begin
+            pivot := a.data[step][step];
+            if pivot.is_zero() then begin
                 // Trouvons une ligne au pivot non nul pour remplacer celle-ci
                 non_zero_line := -1;
                 for y2 := step+1 to a.size-1 do
@@ -221,12 +223,15 @@ implementation
                 n := b.data[step];
                 b.data[step] := b.data[non_zero_line];
                 b.data[non_zero_line] := n;
+
+                // On recommence l'étape step mais le pivot ne sera plus nul
+                continue;
             end;
 
             for y := step+1 to a.size-1 do begin
                 // On veut obtenir `data[step][y] = 0` en ajoutant `n` multiples de la ligne `step`
                 // On doit donc résoudre `data[step][y] + n * data[step][step] = 0`
-                n := a.data[step][y].divide(a.data[step][step]);
+                n := a.data[step][y].divide(pivot);
 
                 // Log si dans le terminal
                 if isatty(output)=1 then begin
