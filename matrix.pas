@@ -186,9 +186,11 @@ implementation
     var non_zero_line: Integer;
     begin
         step := 0;
+        char_pos := WhereY();
         while step <= a.size-2 do begin
             // Log si dans le terminal
             if isatty(output)=1 then begin
+                if isatty(output)=1 then GotoXY(1, char_pos);
                 writeln('Step ', step, ' :');
                 b.display();
                 a.display();
@@ -245,10 +247,12 @@ implementation
                     a.data[x][y] := a.data[x][y].substract(n.multiply(a.data[x][step]));
                 b.data[y] := b.data[y].substract(n.multiply(b.data[step]));
             end;
-            if isatty(output)=1 then GotoXY(1, char_pos);
             
             step := step + 1;
         end;
+
+        if isatty(output)=1 then
+            GotoXY(1, char_pos);
     end;
 end.
 
