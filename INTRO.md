@@ -1,4 +1,4 @@
-Ceci est la version en markdown de la partie informatique du rapport.
+# Ceci est la version en markdown de la partie informatique du rapport.
 
 ## Nombres flottants et norme IEEE 754
 
