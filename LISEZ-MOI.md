@@ -182,7 +182,7 @@ Terminé!
 └              ┘
 ```
 
-A chaque étape, le programme affiche la matrice `B` puis `A`, accompangée des opérations qui seront effectuées sur les lignes pour passer à l'étape suivante.
+A chaque étape, le programme affiche la matrice `B` puis `A`, accompagnée des opérations qui seront effectuées sur les lignes pour passer à l'étape suivante.
 
 ## Nombres flottants ou rationnels ?
 
